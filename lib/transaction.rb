@@ -19,7 +19,12 @@ class Transaction
 	def invoke_transaction
 		if @product.stock > 0
 			@product.decrease_stock
+			@@transactions << self
 		end
+	end
+	
+	def self.find(id)
+		@@transactions.bsearch {|transaction| transaction.id == id}
 	end
 	
 end
