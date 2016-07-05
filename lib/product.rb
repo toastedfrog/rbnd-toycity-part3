@@ -45,4 +45,8 @@ class Product
 			raise DuplicateProductError, "'#{title}' already exists."
 		end
 	end
+	
+	def decrease_stock
+		@stock -= 1
+	end
 end

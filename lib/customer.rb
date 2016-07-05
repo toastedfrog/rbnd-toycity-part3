@@ -29,4 +29,7 @@ class Customer
 		end
 	end
 	
+	def purchase(product)
+	end
+	
 end
