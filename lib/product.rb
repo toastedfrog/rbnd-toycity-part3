@@ -28,6 +28,16 @@ class Product
 		return false
 	end
 	
+	def self.in_stock
+		in_stock = []
+		@@products.each do |product|
+			if product.in_stock?
+				in_stock << product
+			end
+		end
+		in_stock
+	end
+	
 	def add_to_products
 		if !self.class.find_by_title title
 			@@products << self
