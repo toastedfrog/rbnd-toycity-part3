@@ -22,16 +22,18 @@ class Customer
 		return false
 	end
 	
+	def purchase(product)
+		@transactions << Transaction.new(self, product)
+	end
+	
+	private
+	
 	def add_to_customers
 		if !self.class.find_by_name name
 			@@customers << self
 		else
 			raise DuplicateCustomerError, "'#{name}' already exists."
 		end
-	end
-	
-	def purchase(product)
-		@transactions << Transaction.new(self, product)
 	end
 	
 end

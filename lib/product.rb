@@ -18,7 +18,7 @@ class Product
 		stock>0 ? true : false
 	end
 	
-	# Returns true or false
+	# Returns product or false
 	def self.find_by_title(title_string)
 		@@products.each do |product|
 			if product.title == title_string
@@ -28,6 +28,7 @@ class Product
 		return false
 	end
 	
+	# Returns an array of all in-stock items
 	def self.in_stock
 		in_stock = []
 		@@products.each do |product|
@@ -38,6 +39,13 @@ class Product
 		in_stock
 	end
 	
+	# Called when a transaction is created on this product
+	def decrease_stock
+		@stock -= 1
+	end
+	
+	private
+	
 	def add_to_products
 		if !self.class.find_by_title title
 			@@products << self
@@ -46,7 +54,4 @@ class Product
 		end
 	end
 	
-	def decrease_stock
-		@stock -= 1
-	end
 end
