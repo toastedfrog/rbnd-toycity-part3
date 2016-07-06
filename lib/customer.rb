@@ -1,5 +1,5 @@
 class Customer
-	attr_reader :name, :transactions
+	attr_reader :name, :transactions, :returns
 
 	@@customers = []
 	
@@ -10,6 +10,7 @@ class Customer
 	def initialize(options=[])
 		@name = options[:name]
 		@transactions = []
+		@returns = []
 		add_to_customers
 	end
 	
@@ -26,6 +27,22 @@ class Customer
 		@transactions << Transaction.new(self, product)
 	end
 	
+	# Returns the total amount spent by the customer
+	def total_spent
+		@transactions.inject(0) {|sum, transaction| sum + transaction.paid}
+	end
+	
+	def return_item(product)
+		if (transaction = find_transaction product)
+			@transactions.delete transaction
+			@returns << transaction
+			Transaction.all.delete transaction
+			product.increase_stock
+		else
+			raise NoTransactionToReturnError, "There is no purchase of '#{product.title}' to return for customer #{@name}."
+		end
+	end
+	
 	private
 	
 	def add_to_customers
@@ -34,6 +51,11 @@ class Customer
 		else
 			raise DuplicateCustomerError, "'#{name}' already exists."
 		end
+	end
+	
+	# Finds the most recent purchase of this product
+	def find_transaction(product)
+		@transactions.reverse.find {|transaction| transaction.product == product}
 	end
 	
 end

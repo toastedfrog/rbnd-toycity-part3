@@ -1,5 +1,5 @@
 class Transaction
-	attr_reader :id, :customer, :product
+	attr_reader :id, :customer, :product, :cost, :paid
 
 	@@transactions = []
 	@@id = 1
@@ -12,11 +12,12 @@ class Transaction
 		@@transactions.bsearch {|transaction| transaction.id == id}
 	end
 	
-	def initialize(customer, product)
+	def initialize(customer, product, paid = product.price)
 		@id = @@id
 		@@id += 1
 		@customer = customer
 		@product = product
+		@paid = paid
 		invoke_transaction
 	end
 	

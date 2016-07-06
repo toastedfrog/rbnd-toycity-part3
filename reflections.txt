@@ -1,0 +1,8 @@
+1. This went very smoothly start to finish. Probably spent a total of under 2 hours.
+
+2. Learning how exceptions are raised was so enlightening! I feel it's so much easier to create usable applications with that ability.
+
+3. I gave the customer class the ability to track its own transactions, and to report on the amount the customer has spent. The transaction class can take an alternate amount for an item, to allow items to be purchased for a price other than the set cost (ad sales, etc.).
+	These items can also be returned (return_item). Returns are tracked by the customer instance that returned them, but removed from the class array of transactions as they are negated.
+
+4. I think I still have room to grow in creating my own classes in a logical and organized manner. Also, still trying to think D.R.Y. while keeping logic where it should be. Rough stuff, but rewarding.
